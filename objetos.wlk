@@ -64,8 +64,10 @@ class Oak inherits Entrenador{
     var property image = "oak.png"
 }
 
-
-
+object mapa{
+    var property image = "fondo2.png"
+    var property position = new Position(x= 0, y = 0)
+}
 
 // el jugador es entrenador, los demas personajes para combatir tambien son entrenadores, pero el jugador tiene cosas particulares porque es el mas particular de todos
 // entonces podria hacer que, como jugador es lo mismo que entrenador pero con mas cosas, que entrenador sea superclase y jugador herede de entrenador
