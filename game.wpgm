@@ -1,0 +1,46 @@
+import pokemon.*
+import wollok.game.*
+import objetos.*
+
+
+
+program wollomon {
+	//  CONFIG	
+	game.title("WolloMon")
+	game.height(20)
+	game.width(20)
+	game.boardGround("fondo.png")
+
+	const player = new Player()
+    const oak = new Oak()
+
+ 	game.addVisualCharacter(player)
+	game.addVisual(oak)
+
+	const muros = [
+		new Muro(position = game.at(4, 0)), 
+		new Muro(position = game.at(4, 1)),
+		new Muro(position = game.at(4, 1)),
+		new Muro(position = game.at(5, 1)),
+		new Muro(position = game.at(6, 1)),
+		new Muro(position = game.at(7, 1)),
+		new Muro(position = game.at(8, 1)),
+		new Muro(position = game.at(8, 1)),
+		new Muro(position = game.at(8, 0))
+	]
+
+    keyboard.d().onPressDo({player.moverConColisionDer(player.position().right(1), muros)})
+    keyboard.a().onPressDo({player.moverConColisionIzq(player.position().left(1), muros)})
+    keyboard.w().onPressDo({player.moverConColisionArriba(player.position().up(1), muros)})
+    keyboard.s().onPressDo({player.moverConColisionAbajo(player.position().down(1), muros)})
+	
+	keyboard.p().onPressDo({game.say(player, "Tengo: " + player.bolsa().map{pokemon => pokemon.nombre()})}) 
+	//game.onCollideDo(player, game.say(oak, "Bienvenido, ¿cual será tu pokemon inicial? B. Bulbasaur, C.Charmander o S.Squirtle"))
+ 	
+	const musicafondo = game.sound("musicafondo.mp3")
+	musicafondo.shouldLoop(true)
+	game.schedule(500, { musicafondo.play()} )
+
+	player.agregarPokemon(new Bulbasaur())
+	game.start()
+}
